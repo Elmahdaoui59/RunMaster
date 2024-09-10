@@ -9,7 +9,8 @@ sealed   interface DataError: Error {
         NO_INTERNET,
         PAYLOAD_TOO_LARGE,
         SERIALIZATION,
-        UNKNOWN
+        UNKNOWN,
+        SERVER_ERROR
     }
     enum class Local: DataError {
         DISK_FULL
