@@ -46,7 +46,7 @@ val KeyboardArrowUpIcon: ImageVector
 val LocationIcon: ImageVector
     @Composable
     get() = ImageVector.vectorResource(id = R.drawable.location)
-val lockIcon: ImageVector
+val LockIcon: ImageVector
     @Composable
     get() = ImageVector.vectorResource(id = R.drawable.lock)
 val LogoIcon: ImageVector
