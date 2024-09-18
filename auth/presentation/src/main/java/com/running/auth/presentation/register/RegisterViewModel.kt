@@ -3,8 +3,12 @@ package com.running.auth.presentation.register
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.compose.runtime.snapshotFlow
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.running.auth.domain.UserDataValidator
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 
 class RegisterViewModel(
     private val userDataValidator: UserDataValidator
@@ -13,13 +17,18 @@ class RegisterViewModel(
         private set
 
     init {
-        state.email.textAsFlow()
-            .onEach { email ->
-                state = state.copy(
-                    isEmailValid = userDataValidator.isValidEmail(email.toString)
-                )
-            }
-            .lau
+        snapshotFlow { state.email }.onEach {email ->
+            state = state.copy(
+                isEmailValid = userDataValidator.isValidEmail(email.toString())
+            )
+        }.launchIn(viewModelScope)
+
+        snapshotFlow { state.password }.onEach { password ->
+            state = state.copy(
+                passwordValidationState = userDataValidator.validatePassword(password.toString())
+            )
+        }.launchIn(viewModelScope)
+
     }
     fun onAction(action: RegisterAction) {
         
