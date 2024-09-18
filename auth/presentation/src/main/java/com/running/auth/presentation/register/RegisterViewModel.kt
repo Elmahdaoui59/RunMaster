@@ -1,5 +1,6 @@
 package com.running.auth.presentation.register
 
+import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -17,18 +18,23 @@ class RegisterViewModel(
         private set
 
     init {
-        snapshotFlow { state.email }.onEach {email ->
+        snapshotFlow { state.email.text }.onEach {email ->
+            val isValidEmail = userDataValidator.isValidEmail(email.toString())
             state = state.copy(
-                isEmailValid = userDataValidator.isValidEmail(email.toString())
+                isEmailValid = isValidEmail,
+                canRegister = isValidEmail && state.passwordValidationState.isValidPassword
+                        && !state.isRegistering
             )
         }.launchIn(viewModelScope)
 
-        snapshotFlow { state.password }.onEach { password ->
+        snapshotFlow { state.password.text }.onEach { password ->
+            val passwordValidationState = userDataValidator.validatePassword(password.toString())
             state = state.copy(
-                passwordValidationState = userDataValidator.validatePassword(password.toString())
+                passwordValidationState = passwordValidationState,
+                canRegister = state.isEmailValid && passwordValidationState.isValidPassword
+                        && !state.isRegistering
             )
         }.launchIn(viewModelScope)
-
     }
     fun onAction(action: RegisterAction) {
         

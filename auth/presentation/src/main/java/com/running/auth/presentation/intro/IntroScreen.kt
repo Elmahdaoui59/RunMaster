@@ -27,14 +27,14 @@ import com.running.core.presentation.designsystem.components.RuniqueOutlinedActi
 
 @Composable
 fun IntroScreenRout(
-    onSignUPClick: () -> Unit,
+    onSignUpClick: () -> Unit,
     onSignInClick: () -> Unit
 ) {
     IntroScreen(
         onAction = { action: IntroAction ->
             when (action) {
                 IntroAction.OnSignInClick -> onSignInClick()
-                IntroAction.OnSignUpClick -> onSignUPClick()
+                IntroAction.OnSignUpClick -> onSignUpClick()
             }
 
         }
