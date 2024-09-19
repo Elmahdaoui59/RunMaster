@@ -3,6 +3,7 @@ package com.running.runmaster
 import android.app.Application
 import com.running.auth.data.di.authDataModule
 import com.running.auth.presentation.di.authViewModelModule
+import com.running.core.data.di.coreDataModule
 import com.running.runmaster.di.appModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -21,7 +22,8 @@ class RunMasterApp: Application() {
             modules(
                 authDataModule,
                 authViewModelModule,
-                appModule
+                appModule,
+                coreDataModule
             )
         }
     }
