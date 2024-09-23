@@ -43,7 +43,7 @@ import com.running.core.presentation.designsystem.RuniqueGreen
 import com.running.core.presentation.designsystem.components.GradientBackground
 import com.running.core.presentation.designsystem.components.RunMasterPasswordTextField
 import com.running.core.presentation.designsystem.components.RunMasterTextField
-import com.running.core.presentation.designsystem.components.RuniqueActionButton
+import com.running.core.presentation.designsystem.components.RunMasterActionButton
 import com.running.core.presentation.ui.ObserveAsEvents
 import org.koin.androidx.compose.koinViewModel
 
@@ -107,7 +107,7 @@ fun RegisterScreen(
                 withStyle(
                     style = SpanStyle(
                         fontFamily = Poppins,
-                        color = RuniqueGray
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                 ) {
                     append(stringResource(id = R.string.already_have_account) + " ")
@@ -186,7 +186,7 @@ fun RegisterScreen(
                 isValid = state.passwordValidationState.hasUpperCaseCharacter,
             )
             Spacer(Modifier.height(32.dp))
-            RuniqueActionButton(
+            RunMasterActionButton(
                 text = stringResource(id = R.string.register),
                 isLoading = state.isRegistering,
                 enabled = state.canRegister,

@@ -21,7 +21,7 @@ import com.running.auth.presentation.R
 import com.running.core.presentation.designsystem.LogoIcon
 import com.running.core.presentation.designsystem.RunMasterTheme
 import com.running.core.presentation.designsystem.components.GradientBackground
-import com.running.core.presentation.designsystem.components.RuniqueActionButton
+import com.running.core.presentation.designsystem.components.RunMasterActionButton
 import com.running.core.presentation.designsystem.components.RuniqueOutlinedActionButton
 
 
@@ -82,7 +82,7 @@ fun IntroScreen(
             )
 
             Spacer(modifier = Modifier.height(16.dp))
-            RuniqueActionButton(
+            RunMasterActionButton(
                 text = stringResource(id = R.string.sign_up),
                 isLoading = false,
                 modifier = Modifier.fillMaxWidth(),

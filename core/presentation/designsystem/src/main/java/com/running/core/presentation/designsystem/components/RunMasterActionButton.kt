@@ -23,7 +23,7 @@ import com.running.core.presentation.designsystem.RuniqueBlack
 import com.running.core.presentation.designsystem.RuniqueGray
 
 @Composable
-fun RuniqueActionButton(
+fun RunMasterActionButton(
     text: String,
     isLoading: Boolean,
     modifier: Modifier = Modifier,
