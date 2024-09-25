@@ -12,6 +12,7 @@ import com.running.auth.presentation.intro.IntroScreenRout
 import com.running.auth.presentation.login.LoginsScreenRoot
 import com.running.auth.presentation.register.RegisterScreen
 import com.running.auth.presentation.register.RegisterScreenRoot
+import com.running.run.presentation.run_overview.RunOverviewScreenRoot
 
 
 @Composable
@@ -88,7 +89,7 @@ private fun NavGraphBuilder.runGraph(navController: NavHostController) {
         route = "run"
     ) {
         composable("run_overview") {
-            Text(text = "Run overview!")
+            RunOverviewScreenRoot()
         }
     }
 }
