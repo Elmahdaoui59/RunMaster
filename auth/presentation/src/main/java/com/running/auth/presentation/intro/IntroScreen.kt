@@ -22,7 +22,7 @@ import com.running.core.presentation.designsystem.LogoIcon
 import com.running.core.presentation.designsystem.RunMasterTheme
 import com.running.core.presentation.designsystem.components.GradientBackground
 import com.running.core.presentation.designsystem.components.RunMasterActionButton
-import com.running.core.presentation.designsystem.components.RuniqueOutlinedActionButton
+import com.running.core.presentation.designsystem.components.RunMasterOutlinedActionButton
 
 
 @Composable
@@ -72,7 +72,7 @@ fun IntroScreen(
                 style = MaterialTheme.typography.bodySmall 
             )
             Spacer(modifier = Modifier.height(32.dp))
-            RuniqueOutlinedActionButton(
+            RunMasterOutlinedActionButton(
                 text = stringResource(id = R.string.sign_in),
                 isLoading = false,
                 modifier = Modifier.fillMaxWidth(),

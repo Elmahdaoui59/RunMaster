@@ -66,7 +66,7 @@ fun RunMasterActionButton(
 }
 
 @Composable
-fun RuniqueOutlinedActionButton(
+fun RunMasterOutlinedActionButton(
     text: String,
     isLoading: Boolean,
     modifier: Modifier = Modifier,
