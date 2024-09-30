@@ -28,7 +28,7 @@ class ActiveRunViewModel(
         _hasLocationPermission
             .onEach { hasPermission ->
                 if (hasPermission) {
-                    runningTracker.stopObservingLocation()
+                    runningTracker.startObservingLocation()
                 } else {
                     runningTracker.stopObservingLocation()
                 }
