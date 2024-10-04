@@ -31,6 +31,7 @@ import com.running.core.presentation.designsystem.components.RunMasterToolbar
 import com.running.core.presentation.designsystem.components.RunMasterOutlinedActionButton
 import com.running.run.presentation.R
 import com.running.run.presentation.active_run.components.RunDataCard
+import com.running.run.presentation.active_run.maps.TrackerMap
 import com.running.run.presentation.util.hasLocationPermission
 import com.running.run.presentation.util.hasNotificationPermission
 import com.running.run.presentation.util.shouldShowLocationPermissionRationale
@@ -135,6 +136,14 @@ fun ActiveRunScreen(
                 .fillMaxSize()
                 .background(MaterialTheme.colorScheme.surface)
         ) {
+            TrackerMap(
+                isRunFinished = state.isRunFinished,
+                currentLocation = state.currentLocation,
+                locations = state.runData.locations,
+                onSnapshot = {},
+                modifier = Modifier
+                    .fillMaxSize()
+            )
             RunDataCard(
                 elapsedTime = state.elapsedTime,
                 runData = state.runData,
