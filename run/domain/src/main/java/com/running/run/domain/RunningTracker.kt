@@ -50,6 +50,17 @@ class RunningTracker(
 
     init {
         isTracking
+            .onEach { isTracking ->
+                if (!isTracking) {
+                    val newList = buildList {
+                        addAll(runData.value.locations)
+                        add(emptyList<LocationTimestamp>())
+                    }.toList()
+                    _runData.update {
+                        it.copy(locations = newList)
+                    }
+                }
+            }
             // flatmapLatest just map a flow to another flow
             .flatMapLatest { isTracking ->
                 //every time 'isTracking' switches from true to false or the inverse,

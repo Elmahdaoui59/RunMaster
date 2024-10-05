@@ -40,7 +40,7 @@ fun RunMasterActionButton(
             disabledContentColor = RuniqueBlack
         ),
         shape = RoundedCornerShape(100f),
-        modifier = Modifier.height(IntrinsicSize.Min)
+        modifier = modifier.height(IntrinsicSize.Min)
     ) {
         Box(
             modifier = modifier
@@ -84,7 +84,7 @@ fun RunMasterOutlinedActionButton(
             color = MaterialTheme.colorScheme.onBackground
         ),
         shape = RoundedCornerShape(100f),
-        modifier = Modifier.height(IntrinsicSize.Min)
+        modifier = modifier.height(IntrinsicSize.Min)
     ) {
         Box(
             modifier = modifier

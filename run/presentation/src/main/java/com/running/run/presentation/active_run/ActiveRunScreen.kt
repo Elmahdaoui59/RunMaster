@@ -24,6 +24,7 @@ import androidx.compose.ui.unit.dp
 import com.running.core.presentation.designsystem.RunMasterTheme
 import com.running.core.presentation.designsystem.StartIcon
 import com.running.core.presentation.designsystem.StopIcon
+import com.running.core.presentation.designsystem.components.RunMasterActionButton
 import com.running.core.presentation.designsystem.components.RunMasterDialog
 import com.running.core.presentation.designsystem.components.RunMasterFloatingActionButton
 import com.running.core.presentation.designsystem.components.RunMasterScaffold
@@ -156,6 +157,35 @@ fun ActiveRunScreen(
         }
     }
 
+    if (!state.shouldTrack && state.hasStartedRunning) {
+        RunMasterDialog(
+            title = stringResource(id = R.string.running_is_paused),
+            onDismiss = {
+                onAction(ActiveRunAction.OnResumeRunClick)
+            },
+            description = stringResource(id = R.string.resume_or_finish_run),
+            primaryButton = {
+                RunMasterActionButton(
+                    text = stringResource(id = R.string.resume),
+                    isLoading = false,
+                    onClick = {
+                        onAction(ActiveRunAction.OnResumeRunClick)
+                    },
+                    modifier = Modifier.weight(1f)
+                )
+            },
+            secondaryButton = {
+                RunMasterOutlinedActionButton(
+                    text = stringResource(id = R.string.finish),
+                    isLoading = state.isSavingRun,
+                    onClick = {
+                        onAction(ActiveRunAction.OnFinishRunClick)
+                    },
+                    modifier = Modifier.weight(1f)
+                )
+            }
+        )
+    }
     if (state.showLocationRationale || state.showNotificationRationale) {
         RunMasterDialog(
             title = stringResource(id = R.string.permission_required),
