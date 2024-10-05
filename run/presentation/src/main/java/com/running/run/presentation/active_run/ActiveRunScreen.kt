@@ -155,6 +155,7 @@ fun ActiveRunScreen(
             )
         }
     }
+
     if (state.showLocationRationale || state.showNotificationRationale) {
         RunMasterDialog(
             title = stringResource(id = R.string.permission_required),
