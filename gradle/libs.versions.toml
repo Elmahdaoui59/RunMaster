@@ -41,7 +41,7 @@ playServicesMaps = "18.2.0"
 annotation = "1.7.1"
 
 # Project versions
-projectApplicationId = "com.plcoding.runique"
+projectApplicationId = "com.running.runmaster"
 projectVersionName = "1.0"
 projectMinSdkVersion = "26"
 projectTargetSdkVersion = "34"
