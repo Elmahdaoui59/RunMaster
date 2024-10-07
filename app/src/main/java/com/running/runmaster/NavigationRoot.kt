@@ -3,16 +3,19 @@ package com.running.runmaster
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
+import androidx.navigation.navDeepLink
 import com.running.auth.presentation.intro.IntroScreenRout
 import com.running.auth.presentation.login.LoginsScreenRoot
 import com.running.auth.presentation.register.RegisterScreen
 import com.running.auth.presentation.register.RegisterScreenRoot
 import com.running.run.presentation.active_run.ActiveRunScreenRoot
+import com.running.run.presentation.active_run.service.ActiveRunService
 import com.running.run.presentation.run_overview.RunOverviewScreenRoot
 
 
@@ -29,6 +32,7 @@ fun NavigationRoot(
         runGraph(navController)
     }
 }
+
 private fun NavGraphBuilder.authGraph(navController: NavHostController) {
     navigation(
         startDestination = "intro",
@@ -64,7 +68,7 @@ private fun NavGraphBuilder.authGraph(navController: NavHostController) {
         composable("login") {
             LoginsScreenRoot(
                 onLoginSuccess = {
-                    navController.navigate("run"){
+                    navController.navigate("run") {
                         popUpTo("auth") {
                             inclusive = true
                         }
@@ -96,8 +100,32 @@ private fun NavGraphBuilder.runGraph(navController: NavHostController) {
                 }
             )
         }
-        composable("active_run") {
-            ActiveRunScreenRoot( )
+        composable("active_run",
+            deepLinks = listOf(
+                navDeepLink {
+                    uriPattern = "runique://active_run"
+                }
+            )
+        ) {
+            val context = LocalContext.current
+            ActiveRunScreenRoot(
+                onServiceToggle = { shouldServiceRun ->
+                    if (shouldServiceRun) {
+                        context.startService(
+                            ActiveRunService.createStartIntent(
+                                context = context,
+                                activityClass = MainActivity::class.java
+                            )
+                        )
+                    } else {
+                        context.startService(
+                            ActiveRunService.createStopIntent(context = context)
+                        )
+                    }
+
+
+                }
+            )
         }
     }
 }

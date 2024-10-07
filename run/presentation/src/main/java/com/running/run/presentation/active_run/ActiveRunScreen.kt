@@ -33,6 +33,7 @@ import com.running.core.presentation.designsystem.components.RunMasterOutlinedAc
 import com.running.run.presentation.R
 import com.running.run.presentation.active_run.components.RunDataCard
 import com.running.run.presentation.active_run.maps.TrackerMap
+import com.running.run.presentation.active_run.service.ActiveRunService
 import com.running.run.presentation.util.hasLocationPermission
 import com.running.run.presentation.util.hasNotificationPermission
 import com.running.run.presentation.util.shouldShowLocationPermissionRationale
@@ -41,10 +42,12 @@ import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun ActiveRunScreenRoot(
+    onServiceToggle: (isServiceRunning: Boolean) -> Unit,
     viewModel: ActiveRunViewModel = koinViewModel()
 ) {
     ActiveRunScreen(
         state = viewModel.state,
+        onServiceToggle = onServiceToggle,
         onAction = viewModel::onAction
     )
 }
@@ -53,6 +56,7 @@ fun ActiveRunScreenRoot(
 @Composable
 fun ActiveRunScreen(
     state: ActiveRunState,
+    onServiceToggle: (isServiceRunning: Boolean) -> Unit,
     onAction: (ActiveRunAction) -> Unit
 ) {
     val context = LocalContext.current
@@ -101,6 +105,18 @@ fun ActiveRunScreen(
         )
         if (!showLocationRationale && !showNotificationRationale) {
             permissionLauncher.requestRunMasterPermission(context)
+        }
+    }
+
+    LaunchedEffect(key1 = state.isRunFinished) {
+        if (state.isRunFinished) {
+            onServiceToggle(false)
+        }
+    }
+
+    LaunchedEffect(key1 = state.shouldTrack) {
+        if (context.hasLocationPermission() && state.shouldTrack && !ActiveRunService.isServiceActive) {
+            onServiceToggle(true)
         }
     }
     RunMasterScaffold(
@@ -247,7 +263,8 @@ private fun ActivityResultLauncher<Array<String>>.requestRunMasterPermission(
 private fun ActiveRunScreenPreview() {
     RunMasterTheme {
         ActiveRunScreen(
-            state = ActiveRunState()
+            state = ActiveRunState(),
+            onServiceToggle = {}
         ) { }
     }
 }
