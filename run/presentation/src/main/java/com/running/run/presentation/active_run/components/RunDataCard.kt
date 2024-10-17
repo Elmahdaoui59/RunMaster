@@ -56,7 +56,7 @@ fun RunDataCard(
         ) {
 
             RunDataItem(
-                title = stringResource(id = R.string.diatance),
+                title = stringResource(id = R.string.distance),
                 value = (runData.distanceMeters / 1000.0).toFormattedKm(),
                 modifier = Modifier.defaultMinSize(minWidth = 75.dp)
             )

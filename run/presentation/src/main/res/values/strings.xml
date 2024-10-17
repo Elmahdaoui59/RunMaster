@@ -7,7 +7,7 @@
     <string name="pause_run">pause run</string>
     <string name="start_run">Start run</string>
     <string name="duration">Duration</string>
-    <string name="diatance">Distance</string>
+    <string name="distance">Distance</string>
     <string name="pace">Pace</string>
     <string name="permission_required">Permission Required!</string>
     <string name="location_notification_rationale">In order to track your location and display the current time as a notification, this app needs your permission for that. Please click on \"Okay\" to grant it.</string>
@@ -18,4 +18,11 @@
     <string name="resume_or_finish_run">Do you want to resume or finish run?</string>
     <string name="resume">Resume</string>
     <string name="finish">Finish</string>
+    <string name="run_map">Run map</string>
+    <string name="error_couldnt_load_image">Couldn\'t load image!</string>
+    <string name="total_running_time">Total running time</string>
+    <string name="avg_speed">Ø speed</string>
+    <string name="max_speed">Max Speed</string>
+    <string name="total_elevation">Total Elevation</string>
+    <string name="delete">Delete</string>
 </resources>
