@@ -4,6 +4,7 @@ import android.Manifest
 import android.content.Context
 import android.graphics.Bitmap
 import android.os.Build
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.ActivityResultLauncher
@@ -22,6 +23,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.Observer
 import com.running.core.presentation.designsystem.RunMasterTheme
 import com.running.core.presentation.designsystem.StartIcon
 import com.running.core.presentation.designsystem.StopIcon
@@ -31,6 +33,7 @@ import com.running.core.presentation.designsystem.components.RunMasterFloatingAc
 import com.running.core.presentation.designsystem.components.RunMasterScaffold
 import com.running.core.presentation.designsystem.components.RunMasterToolbar
 import com.running.core.presentation.designsystem.components.RunMasterOutlinedActionButton
+import com.running.core.presentation.ui.ObserveAsEvents
 import com.running.run.presentation.R
 import com.running.run.presentation.active_run.components.RunDataCard
 import com.running.run.presentation.active_run.maps.TrackerMap
@@ -44,13 +47,40 @@ import java.io.ByteArrayOutputStream
 
 @Composable
 fun ActiveRunScreenRoot(
+    onFinish: () -> Unit,
+    onBack: () -> Unit,
     onServiceToggle: (isServiceRunning: Boolean) -> Unit,
     viewModel: ActiveRunViewModel = koinViewModel()
 ) {
+    val context = LocalContext.current
+
+    ObserveAsEvents(flow = viewModel.events) { event ->
+        when(event) {
+            is ActiveRunEvent.Error -> {
+                Toast.makeText(
+                    context,
+                    event.error.asString(context),
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+            ActiveRunEvent.RunSaved -> onFinish()
+        }
+    }
     ActiveRunScreen(
         state = viewModel.state,
         onServiceToggle = onServiceToggle,
-        onAction = viewModel::onAction
+        onAction = { action ->
+            when(action) {
+                is ActiveRunAction.OnBackClick -> {
+                    if (!viewModel.state.hasStartedRunning) {
+                        onBack()
+                    }
+                }
+                else -> Unit
+            }
+            viewModel.onAction(action)
+
+        }
     )
 }
 

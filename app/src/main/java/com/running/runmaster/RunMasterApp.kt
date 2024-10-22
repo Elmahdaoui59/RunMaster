@@ -6,6 +6,7 @@ import com.running.auth.presentation.di.authViewModelModule
 import com.running.core.data.di.coreDataModule
 import com.running.core.database.di.databaseModule
 import com.running.run.location.di.locationModule
+import com.running.run.network.di.networkModule
 import com.running.run.presentation.di.runPresentationModule
 import com.running.runmaster.di.appModule
 import kotlinx.coroutines.CoroutineScope
@@ -32,7 +33,8 @@ class RunMasterApp: Application() {
                 coreDataModule,
                 runPresentationModule,
                 locationModule,
-                databaseModule
+                databaseModule,
+                networkModule
             )
         }
     }
