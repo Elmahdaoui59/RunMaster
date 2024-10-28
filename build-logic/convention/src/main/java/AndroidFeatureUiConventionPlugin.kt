@@ -1,4 +1,4 @@
-import com.example.convention.addUiLayerDependencies
+import com.running.convention.addUiLayerDependencies
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.dependencies

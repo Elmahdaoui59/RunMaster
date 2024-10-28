@@ -1,5 +1,5 @@
-import com.example.convention.configureKotlinJvm
-import com.example.convention.libs
+import com.running.convention.configureKotlinJvm
+import com.running.convention.libs
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.dependencies
