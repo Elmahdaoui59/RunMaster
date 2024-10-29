@@ -1,13 +1,9 @@
-package com
-
-import com.android.build.api.dsl.ApplicationExtension
 import com.android.build.api.dsl.DynamicFeatureExtension
 import com.running.convention.Extensiontype
 import com.running.convention.addUiLayerDependencies
 import com.running.convention.configureAndroidCompose
 import com.running.convention.configureBuildTypes
 import com.running.convention.configureKotlinAndroid
-import com.running.convention.libs
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
